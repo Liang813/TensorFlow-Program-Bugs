@@ -2,7 +2,7 @@ import tensorflow as tf
 import sys
 import os
 import subprocess
-
+import traceback
 try:
     assert len(sys.argv) == 2
     version = ["-buggy", "-fix"][int(sys.argv[1])]
@@ -24,6 +24,8 @@ def get_target_dir():
             return x
     raise ValueError("No dir ends with %s!" % version)
 
-
-subprocess.call(
-    [interpreter_path, "./%s/seq2seq/test/decoder_test.py" % get_target_dir()])
+try:
+    subprocess.call(
+        [interpreter_path, "./%s/seq2seq/test/decoder_test.py" % get_target_dir()])
+except Exception as e:
+    traceback.print_exc(file=open('/script/seq2seq95-buggy.txt','w+'))
