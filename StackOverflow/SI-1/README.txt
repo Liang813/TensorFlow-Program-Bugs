@@ -1,1 +1,0 @@
-Please run rbm_MNIST_test.py as an entry.
